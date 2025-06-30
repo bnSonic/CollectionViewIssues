@@ -1,0 +1,211 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentView xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+		xmlns:styles="clr-namespace:CollectionViewIssues.Components"
+        xmlns:converters="clr-namespace:CollectionViewIssues.Components"
+        xmlns:images="clr-namespace:CollectionViewIssues.Components"
+        xmlns:vm="clr-namespace:CollectionViewIssues.ViewModels"
+        x:DataType="vm:MyData"
+			 x:Class="CollectionViewIssues.Views.Cells.DataEntryView">
+
+
+    <Grid BackgroundColor="{Binding BackgroundColor}" RowSpacing="0">
+    
+        <Grid.Resources>
+            <ResourceDictionary>
+                <ResourceDictionary.MergedDictionaries>
+                    <styles:StylesMain/>
+                </ResourceDictionary.MergedDictionaries>
+
+
+                <converters:EmptyValueToBoolConverter x:Key="EmptyValueToBoolConverter"/>
+                <converters:BoolToOpacityConverter x:Key="BoolToOpacityConverter"/>
+
+                <!-- <Style x:Key="aufgabeProgressStyle" TargetType="{x:Type charts:DFCircularProgressView}">
+                    <Setter Property="HeightRequest" Value="50"/>
+                    <Setter Property="WidthRequest" Value="50"/>
+                    <Setter Property="FillColor" Value="{DynamicResource BackgroundColor}"/>
+                    <Setter Property="ProgressRingColor" Value="{DynamicResource DialogBackgroundColor}"/>
+                    <Setter Property="ProgressColor" Value="{DynamicResource TileBorderColor}"/>
+                    <Setter Property="TextColor" Value="{DynamicResource TextOnBackgroundColor}"/>
+                    <Setter Property="TextStrokeColor" Value="{DynamicResource BackgroundColor}"/>
+                </Style> -->
+
+            </ResourceDictionary>
+
+        </Grid.Resources>
+
+        <!--Führt den Command aus, wenn auf die Zelle geklickt wird.-->
+        <Grid.GestureRecognizers>
+            <TapGestureRecognizer  Command="{Binding TappedCommand}" 
+                                       CommandParameter="{Binding .}"/>
+        </Grid.GestureRecognizers>
+
+
+        <!--Trennlinie unten als Abschluss-->
+        <BoxView Style="{StaticResource FullLineInGroupCell}"
+                 VerticalOptions="End"
+                 Margin="110, 0, 0, 0"
+                 />
+
+
+        <Grid HorizontalOptions="Fill" x:Name="xamlTextblock" 
+              Padding="0, 0, 15, 0" 
+              ColumnSpacing="0"
+              ColumnDefinitions="50, 50, *, Auto"
+              RowDefinitions="Auto">
+              <!-- RowDefinitions "Auto" was a try to fix the problem but it doesn't; you can set it to "*" or no RowDefinition, doesn't matter -->
+
+
+            <!-- Zeitstrahl Uhrzeit VON -->
+            <Label Grid.Column="0" Grid.Row="0" 
+                   Text="{Binding StartText}"
+                   Style="{StaticResource MainSubDataLabel}"
+                   HorizontalOptions="Center"
+                   VerticalOptions="Center"/>
+
+            <!-- Connector Lines up / down -->
+            <!-- We split the Column into two rows of equal height to draw the upper and lower connector line -->
+            <Grid Grid.Column="1" Grid.Row="0" 
+                  IsVisible="True"
+                  RowSpacing="0"
+                  RowDefinitions="*, *">
+
+                <!-- Verbindungslinie nach oben -->
+                <!-- using Opacity was/is a try to solve the problem but it doesn't -->
+                <!-- ... at first i've used IsVisible with a Binding to HasPrev / HasNext but with IsVisible + Binding i had problem in other views too so i choosed to use Opacity instead -->
+                <BoxView 
+                    Grid.Row="0"
+                    IsVisible="True"
+                    Opacity="{Binding HasPrev, Converter={StaticResource BoolToOpacityConverter}}"
+                    WidthRequest="6"
+                    HorizontalOptions="Center"
+                    VerticalOptions="Fill"
+                    Color="{DynamicResource AufgabeBorderColor}"/>
+
+
+                <!-- Verbindungslinie nach unten -->
+                <BoxView 
+                    Grid.Row="1"
+                    IsVisible="True"
+                    Opacity="{Binding HasNext, Converter={StaticResource BoolToOpacityConverter}}"
+                    WidthRequest="6"
+                    HorizontalOptions="Center"
+                    VerticalOptions="Fill"
+                    Color="{DynamicResource AufgabeBorderColor}" />
+            </Grid>
+
+            <!-- Icon above connector lines -->
+            <!-- you can remove this one - the problem will be stil there; just to let you know: i need to display things on top of the connector lines -->
+            <Grid Grid.Column="1" Grid.Row="0" 
+                  RowDefinitions="60"
+                  ColumnDefinitions="Auto"
+                  VerticalOptions="Center">
+
+                <StackLayout WidthRequest="50"
+                             IsVisible="{Binding IsNotRunning}"
+                             Spacing="0"
+                             VerticalOptions="Center">
+                    
+                    <images:SvgImageEx
+                        Resource="{Binding Icon}"
+                        TintColor="Black"
+                        WidthRequest="50" HeightRequest="50" 
+                        Shape="Circle"
+                        ShapeBorderSize="3"
+                        ShapePadding="5"
+                        ShapeBackgroundColor="{DynamicResource AufgabeBackgroundColor}"
+                        ShapeBorderColor="{DynamicResource AufgabeBorderColor}"
+                        VerticalOptions="Center" HorizontalOptions="End"/>
+                </StackLayout>
+
+                <!-- In real App i choose to display an icon or a progress - not neccessary for this demo -->
+                <!-- <charts:CircularProgressView
+                    IsVisible="{Binding IsRunning}"
+                    Style="{StaticResource aufgabeProgressStyle}"
+                    ProgressColor="{Binding ProgressColor}"
+                    Value="{Binding DauerProgress}"
+                    Text="{Binding DauerStringShort}"
+                    /> -->
+
+            </Grid>
+
+            <Grid x:Name="xamlTextColumn" 
+                Grid.Column="2" Grid.Row="0"
+                Margin="10, 5, 0, 8"
+                HorizontalOptions="Fill" 
+                VerticalOptions="Center" 
+                RowSpacing="0"
+                RowDefinitions="Auto, Auto, Auto">
+
+                <!-- The IsVisible is to make sure the rows are not used (zero height) you can remove the IsVisible binding but the problem will still be there -->
+                <Label 
+                    Grid.Row="0"
+                    Text="{Binding Text1}"
+                    IsVisible="{Binding Text1, Converter={StaticResource EmptyValueToBoolConverter}}"
+                    Style="{StaticResource MainDataNormalLabel}" 
+                    TextColor="{Binding TextColor}" 
+                    FontAttributes="{Binding FontAttributes}"/>
+
+                <Label 
+                    Grid.Row="1"
+                    Text="{Binding Text2}"
+                    IsVisible="{Binding Text2, Converter={StaticResource EmptyValueToBoolConverter}}"
+                    Style="{StaticResource MainSubDataLabel}" 
+                    TextColor="{Binding TextColor}" 
+                    FontAttributes="{Binding FontAttributes}"/>
+
+                <Label 
+                    Grid.Row="2"
+                    Text="{Binding Text3}" 
+                    IsVisible="{Binding Text3, Converter={StaticResource EmptyValueToBoolConverter}}"
+                    Style="{StaticResource MainSmallContentTitleLabel}" 
+                    TextColor="{Binding TextColor}" 
+                    FontAttributes="{Binding FontAttributes}"/>
+
+            </Grid>
+
+            <Grid 
+                Grid.Column="3" Grid.Row="0"
+                RowSpacing="0"
+                Padding="6, 0, 0, 0"
+                VerticalOptions="Center"
+                RowDefinitions="Auto, Auto">
+                <Label 
+                    Grid.Row="0"
+                    Text="{Binding StundenText}"
+                    IsVisible="{Binding StundenText, Converter={StaticResource EmptyValueToBoolConverter}}"
+                    Style="{StaticResource MainSubDataLabel}"
+                    FontAttributes="Bold"
+                />
+                <Label 
+                    Grid.Row="1"
+                    Text="Std"
+                    IsVisible="{Binding StundenText, Converter={StaticResource EmptyValueToBoolConverter}}"
+                    Style="{StaticResource MainSmallContentTitleLabel}"
+                    FontAttributes="None"
+                    HorizontalOptions="Center"
+                />
+
+            </Grid>   
+
+            
+
+            <!--<images:SvgImage    
+                Grid.Column="3"
+                Margin="0,0,0,0"
+                IsVisible="{Binding VMTransferElement.IsTransferStatusShown}"
+                Resource="{Binding VMTransferElement.IconTransferStatus}"
+                TintColor="{Binding VMTransferElement.IconColorTransferStatus}"
+                WidthRequest="15" HeightRequest="15" 
+                MinimumWidthRequest="15" MinimumHeightRequest="15" 
+                VerticalOptions="Center" HorizontalOptions="End">
+                <images:SvgImage.GestureRecognizers>
+                    <TapGestureRecognizer Command="{Binding ToOutboxCommand}"/>
+                </images:SvgImage.GestureRecognizers>
+            </images:SvgImage>-->
+        </Grid>
+
+
+    </Grid>
+</ContentView>

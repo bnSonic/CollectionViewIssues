@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentView xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+		xmlns:converters="clr-namespace:CollectionViewIssues.Components"
+        xmlns:images="clr-namespace:CollectionViewIssues.Components"
+			 x:Class="CollectionViewIssues.Views.Cells.GroupEntryViewSimple">
+    
+    <StackLayout BackgroundColor="LightGray" Spacing="0">
+
+        <!--Führt den Command aus, wenn auf die Zelle geklickt wird.-->
+        <StackLayout.GestureRecognizers>
+            <TapGestureRecognizer Command="{Binding GroupTappedCommand}"
+                                  CommandParameter="{Binding .}"/>
+        </StackLayout.GestureRecognizers>
+
+
+        <Grid HorizontalOptions="Fill" 
+              Padding="15,5,15,5" 
+              ColumnSpacing="0">
+
+            <!-- Mindesthöhe von 35 Garantieren mit Platzhalter im Hintergrund -->
+            <BoxView HeightRequest="35"
+                     BackgroundColor="Transparent"/>
+            
+
+            <Label Text="{Binding Title}"
+                    FontSize="17"
+                    FontAttributes="Bold" />
+
+        </Grid>
+
+        <!--Trennlinie unten als Abschluss-->
+        <BoxView HeightRequest="1" Color="Gray"/>
+    </StackLayout>        
+</ContentView>

@@ -1,0 +1,99 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentView xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+		xmlns:converters="clr-namespace:CollectionViewIssues.Components"
+        xmlns:images="clr-namespace:CollectionViewIssues.Components"
+			 x:Class="CollectionViewIssues.Views.Cells.GroupEntryView">
+    
+    <ContentView.Resources>
+        <ResourceDictionary>
+
+            <converters:EmptyValueToBoolConverter x:Key="EmptyValueToBoolConverter"/>
+        </ResourceDictionary>
+    </ContentView.Resources>
+
+
+    <StackLayout BackgroundColor="LightGray" Spacing="0">
+
+        <!--Führt den Command aus, wenn auf die Zelle geklickt wird.-->
+        <StackLayout.GestureRecognizers>
+            <TapGestureRecognizer Command="{Binding GroupTappedCommand}"
+                                  CommandParameter="{Binding .}"/>
+        </StackLayout.GestureRecognizers>
+
+
+        <Grid HorizontalOptions="Fill" 
+              Padding="15,5,15,5" 
+              ColumnSpacing="0"
+              ColumnDefinitions="Auto, 50, 25, *, Auto">
+
+            <!-- Mindesthöhe von 35 Garantieren mit Platzhalter im Hintergrund -->
+            <BoxView Grid.ColumnSpan="2"
+                     HeightRequest="35"
+                     BackgroundColor="Transparent"/>
+            
+            <!-- Aufklapp-Indikator wenn Panel geklappt werden kann -->
+            <images:SvgImage 
+                Grid.Column="1"
+                BackgroundColor="Transparent"
+                HeightRequest="10" 
+                WidthRequest="10"
+                VerticalOptions="Center" HorizontalOptions="Center"
+                TintColor="Black"
+                Resource="{Binding ExpandIndicatorSvg}">
+            </images:SvgImage>
+
+            <images:SvgImage 
+                Grid.Column="2"
+                BackgroundColor="Transparent"
+                HeightRequest="25" 
+                WidthRequest="25"
+                VerticalOptions="Center" 
+                HorizontalOptions="Start"
+                TintColor="Black"
+                Resource="{Binding SvgResIcon}">
+            </images:SvgImage>
+
+            <Grid 
+                Grid.Column="3"
+                Padding="10, 0, 10, 0" 
+                HorizontalOptions="Fill" 
+                VerticalOptions="Center" 
+                RowSpacing="0"
+                RowDefinitions="Auto, Auto, Auto">
+
+                <Label Grid.Row="0"
+                       Text="{Binding Title}"
+                       FontSize="17"
+                       FontAttributes="Bold" />
+            </Grid>
+
+
+            <StackLayout Grid.Column="4"
+                         Spacing="0"
+                         Padding="6, 0, 0, 0"
+                         VerticalOptions="Center">
+                <Label 
+                    Text="{Binding StundenTextRES}"
+                    IsVisible="{Binding StundenTextRES, Converter={StaticResource EmptyValueToBoolConverter}}"
+                    FontSize="13"
+                    TextColor="Gray"
+                    FontAttributes="Bold"
+                />
+                <Label 
+                    Text="Std"
+                    IsVisible="{Binding StundenTextRES, Converter={StaticResource EmptyValueToBoolConverter}}"
+                    FontSize="13"
+                    TextColor="Gray"
+                    FontAttributes="None"
+                    HorizontalOptions="Center"
+                />
+
+            </StackLayout>            
+
+        </Grid>
+
+        <!--Trennlinie unten als Abschluss-->
+        <BoxView HeightRequest="1" Color="Gray"/>
+    </StackLayout>        
+</ContentView>

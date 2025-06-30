@@ -1,0 +1,107 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentView xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+		xmlns:local="clr-namespace:CollectionViewIssues.Views"
+		xmlns:components="clr-namespace:CollectionViewIssues.Components"
+			 x:Class="CollectionViewIssues.Views.Demo1View">
+
+    <ContentView.Resources>
+        <ResourceDictionary>
+            <local:MyDataTemplateSelector x:Key="DataTemplateSelector"/>
+        </ResourceDictionary>
+    </ContentView.Resources>
+
+    <Grid
+        BackgroundColor="#FFD6F7D6"
+        IgnoreSafeArea="True"
+        Padding="0, 0, 0, 0" 
+        RowSpacing="0"
+        VerticalOptions="Fill"
+        RowDefinitions="250, 1, *"
+        >
+
+        <!-- Some Toolbar -->
+        <Grid 
+            Grid.Row="0"
+            RowDefinitions="*"
+            ColumnDefinitions="5*">
+
+            <Border
+                Grid.Row="0"
+                Grid.Column="0"
+                Padding="10"
+                BackgroundColor="WhiteSmoke"
+                StrokeShape="RoundRectangle, 10">
+                <!-- <Border.GestureRecognizers>
+                    <TapGestureRecognizer Tapped="ReloadMoreItems_Tapped" />
+                </Border.GestureRecognizers>
+                <Label Text="+10 " /> -->
+                <VerticalStackLayout>
+                    <Label Text="this is a CollectionView showing Items of two types:" TextColor="Gray"/>
+                    <Label Text="a) Group Headers and b) Entries inside that group" TextColor="Gray"/>
+                    <Label Text="These are NOT build-in Groups of the CollectionView!" FontAttributes="Bold" FontSize="15"/>
+                    <Label Text="It's my own logic: If you tap a group-header, the Items (which are bound to the CollectionView) are realoaded with the Entries for that group" TextColor="Gray"/>
+                    <Label Text="I need my own grouping logic to be able to have different group-headers, my own swipe logic etc" TextColor="Gray"/>
+                    <Label Text="The Bug(?) is that the height of the Items are changing when you reload the ObservableCollection and/or when you scroll a longer list" FontAttributes="Italic" FontSize="15"/>
+
+                </VerticalStackLayout>
+            </Border>
+        </Grid>
+
+        <BoxView Grid.Row="1" 
+            Color="Gray"
+                 />
+
+        <!-- Dialog -->
+        <Grid 
+            Grid.Row="2"
+            BackgroundColor="#FFF0B0B0"
+            IgnoreSafeArea="True"
+            VerticalOptions="Fill">
+
+            <Border 
+                Stroke="DarkGreen" 
+                StrokeShape="RoundRectangle, 10"
+                StrokeThickness="1"
+                Margin="10, 0, 10, 50"
+                Padding="0, 0, 0, 0"
+                BackgroundColor="WhiteSmoke">
+                <Grid 
+                    RowSpacing="0"
+                    RowDefinitions="35, *">
+                    <Grid 
+                        Grid.Row="0"
+                        IsVisible="True"
+                        Padding="20, 0, 0, 0"
+                        BackgroundColor="DarkGreen"
+                        ColumnDefinitions="Auto, *, Auto, Auto"
+                        RowDefinitions="35"
+                        ColumnSpacing="0">
+                        <Label Grid.Column="1"
+                                FontAttributes="Bold"
+                                TextColor="White"
+                                Text="Title of the List"                                       
+                                VerticalOptions="Center">
+                        </Label>
+                    </Grid>
+
+                    <Grid 
+                        Grid.Row="1"
+                        >
+
+                        <components:MyCollectionView
+                            x:Name="xamlCollectionView"
+                            VerticalOptions="Fill"
+                            ItemsSource="{Binding Items}"
+                            ItemTemplate="{StaticResource DataTemplateSelector}"
+                            BackgroundColor="#FFF9DBD0"
+                            NoDataText="NoData"
+                            ShowNoDataText="False"
+                            />
+                    </Grid>
+                </Grid>
+
+            </Border>
+        </Grid>
+    </Grid>
+</ContentView>

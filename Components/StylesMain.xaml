@@ -1,0 +1,228 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ResourceDictionary xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="CollectionViewIssues.Components.StylesMain">
+
+    <!-- Horizontale Trennlinie -->
+    <Style x:Key="DelimitterDefault" TargetType="BoxView">
+        <Setter Property="Color" Value="DarkGray"/>
+        <Setter Property="HeightRequest" Value="1"/>
+    </Style>
+    <!-- Syntax-Zucker: Nochmal die horizontale Trennlinie; anderer Name, weil dieser schon in vielen XAML genutzt wurde -->
+    <Style x:Key="FullLine" TargetType="BoxView" BasedOn="{StaticResource DelimitterDefault}" />
+
+    <Style x:Key="FullLineToolbar" TargetType="BoxView" BasedOn="{StaticResource DelimitterDefault}">
+        <Setter Property="Color" Value="Green"/>
+        <Setter Property="Opacity" Value=".7"/>
+    </Style>
+
+    <Style x:Key="FullLineInGroupCell" TargetType="BoxView" BasedOn="{StaticResource DelimitterDefault}">
+        <Setter Property="Color" Value="DarkGreen"/>
+    </Style>
+
+    <Style x:Key="FullLineInPanel" TargetType="BoxView">
+        <Setter Property="Color" Value="DarkGreen"/>
+        <Setter Property="HeightRequest" Value="1"/>
+        <Setter Property="Margin" Value="10, 0, 10, 0"/>
+    </Style>
+
+    
+    <!-- Label-Style für Beschriftung eines Abschnitts / Feldes ("Notizen", "Preisermittlung" "E-Mail (geschäftlich)" etc. -->
+    <Style x:Key="MainSmallContentTitleLabel" TargetType="Label">
+        <Setter Property="TextColor" Value="Gray"/>
+        <Setter Property="FontSize" Value="11"/>
+        <Setter Property="FontAttributes" Value="None"/>
+        <Setter Property="VerticalTextAlignment" Value="Center"/>
+    </Style>
+    <!--Button-Style mit abgerundeten Ecken-->
+    <Style x:Key="RoundedCornerButtonStyle" TargetType="Button">
+        <Setter Property="VisualStateManager.VisualStateGroups">
+            <VisualStateGroupList>
+                <VisualStateGroup x:Name="CommonStates">
+                    <VisualState x:Name="Normal">
+                        <VisualState.Setters>
+                            <Setter Property="BackgroundColor" Value="Green"/>
+                            <Setter Property="BorderColor" Value="Green"/>
+                            <Setter Property="TextColor" Value="White"/>
+                        </VisualState.Setters>
+                    </VisualState>
+                    <VisualState x:Name="Disabled">
+                        <VisualState.Setters>
+                            <Setter Property="BackgroundColor" Value="WhiteSmoke"/>
+                            <Setter Property="BorderColor" Value="Gray"/>
+                            <Setter Property="TextColor" Value="Gray"/>
+                        </VisualState.Setters>
+                    </VisualState>
+                </VisualStateGroup>
+            </VisualStateGroupList>
+        </Setter>
+        <Setter Property="BackgroundColor" Value="Green"/>
+        <Setter Property="BorderColor" Value="Green"/>
+        <Setter Property="TextColor" Value="White"/>
+        <Setter Property="BorderWidth" Value="1"/>
+        <Setter Property="CornerRadius" Value="25"/>
+    </Style>
+
+     <!-- Label-Style für Einträge in Settings -->
+    <Style x:Key="MainSettingNormalLabel" TargetType="Label">
+        <Setter Property="TextColor" Value="Black"/>
+        <Setter Property="FontSize" Value="17"/>
+        <Setter Property="FontAttributes" Value="None"/>
+    </Style>
+    <Style x:Key="MainSettingSubtextLabel" TargetType="Label">
+        <Setter Property="TextColor" Value="Gray"/>
+        <Setter Property="FontSize" Value="11"/>
+        <Setter Property="FontAttributes" Value="None"/>
+    </Style>
+    
+    <!-- Label-Style für normale Daten-Anzeige (Telefonnummern, Notiz-Texte, etc.) -->
+    <Style x:Key="MainDataNormalLabel" TargetType="Label">
+        <Setter Property="TextColor" Value="Black"/>
+        <Setter Property="FontSize" Value="15"/>
+        <Setter Property="FontAttributes" Value="None"/>
+    </Style>
+    <!-- Daten-Style für Entry Feld; Sollte identisch zum MainDataNormalLabel sein -->
+    <Style x:Key="MainDataNormalEntry" TargetType="Entry">
+        <Setter Property="TextColor" Value="Black"/>
+        <Setter Property="BackgroundColor" Value="LightGray"/>
+        <Setter Property="FontSize" Value="15"/>
+        <Setter Property="FontAttributes" Value="None"/>
+        <Setter Property="PlaceholderColor" Value="Gray"/>
+    </Style>
+    <Style x:Key="MainDataNormalEditor" TargetType="Editor">
+        <Setter Property="TextColor" Value="Black"/>
+        <Setter Property="BackgroundColor" Value="LightGray"/>
+        <Setter Property="FontSize" Value="15"/>
+        <Setter Property="FontAttributes" Value="None"/>
+        <Setter Property="PlaceholderColor" Value="Gray"/>
+    </Style>
+    <!-- Daten-Style für Picker Feld; Sollte identisch zum MainDataNormalLabel sein -->
+    <Style x:Key="MainDataNormalPicker" TargetType="Picker">
+        <Setter Property="TextColor" Value="Black"/>
+        <Setter Property="BackgroundColor" Value="LightGray"/>
+        <Setter Property="FontSize" Value="15"/>
+        <Setter Property="FontAttributes" Value="None"/>
+    </Style>
+    <Style x:Key="MainDataNormalDatePicker" TargetType="DatePicker">
+        <Setter Property="TextColor" Value="Black"/>
+        <Setter Property="BackgroundColor" Value="LightGray"/>
+        <Setter Property="FontSize" Value="15"/>
+        <Setter Property="FontAttributes" Value="None"/>
+    </Style>
+    <Style x:Key="MainDataNormalTimePicker" TargetType="TimePicker">
+        <Setter Property="TextColor" Value="Black"/>
+        <Setter Property="BackgroundColor" Value="LightGray"/>
+        <Setter Property="FontSize" Value="15"/>
+        <Setter Property="FontAttributes" Value="None"/>
+    </Style>
+
+
+    <!-- Label-Style für Zusatz-Informationen unter einem DFDataNormalLabel (z.B. Straße+Ort unter LV-Bez., "Büro"/"Durchwahl" unter Kontakt-Informationen) -->
+    <Style x:Key="MainSubDataLabel" TargetType="Label">
+        <Setter Property="TextColor" Value="Black"/>
+        <Setter Property="FontSize" Value="13"/>
+        <Setter Property="FontAttributes" Value="None"/>
+    </Style>
+    <Style x:Key="MainSubDataLabelSpan" TargetType="Span">
+        <Setter Property="TextColor" Value="Black"/>
+        <Setter Property="FontSize" Value="13"/>
+        <Setter Property="FontAttributes" Value="None"/>
+    </Style>
+
+    <!-- Label für Gruppentitel in einer ListView oder ähnlich -->
+    <Style x:Key="MainGroupTitleLabel" TargetType="Label">
+        <Setter Property="TextColor" Value="Black"/>
+        <Setter Property="FontSize" Value="15"/>
+        <Setter Property="FontAttributes" Value="Bold"/>
+    </Style>
+
+    <!-- Label Styles für eigenen Toolbar-Fake (Labels die wie Toolbar-Buttons eingesetzt werden -->
+    <OnPlatform x:TypeArguments="x:Double" x:Key="ToolbarFontSize">
+        <On Platform="Android" Value="16"/>
+        <On Platform="iOS" Value="16"/>
+    </OnPlatform>
+    <OnPlatform x:TypeArguments="FontAttributes" x:Key="ToolbarFontAttributes">
+        <On Platform="Android" Value="Bold"/>
+        <On Platform="iOS" Value="None"/>
+    </OnPlatform>
+    
+    <Style x:Key="MainToolbarItemEnabled" TargetType="Label">
+        <Setter Property="VisualStateManager.VisualStateGroups">
+            <VisualStateGroupList x:Name="CommonStates">
+                <VisualStateGroup>
+                    <VisualState x:Name="Normal">
+                        <VisualState.Setters>
+                            <Setter Property="TextColor" Value="Green"/>
+                            <Setter Property="FontAttributes" Value="{StaticResource ToolbarFontAttributes}"/>
+                            <Setter Property="FontSize" Value="{StaticResource ToolbarFontSize}"/>
+                        </VisualState.Setters>
+                    </VisualState>
+                    <VisualState x:Name="Disabled">
+                        <VisualState.Setters>
+                            <Setter Property="TextColor" Value="Gray"/>
+                            <Setter Property="FontAttributes" Value="{StaticResource ToolbarFontAttributes}"/>
+                            <Setter Property="FontSize" Value="{StaticResource ToolbarFontSize}"/>
+                        </VisualState.Setters>
+                    </VisualState>
+                </VisualStateGroup>
+            </VisualStateGroupList>
+        </Setter>
+        
+    </Style>
+    <Style x:Key="MainToolbarItemDisabled" TargetType="Label">
+        <Setter Property="TextColor" Value="Gray"/>
+        <Setter Property="FontAttributes" Value="Bold"/>
+    </Style>
+        
+    <!-- Frame abgerundet für Panel/Tiles -->
+    <Style x:Key="PanelTileBorderMaui" TargetType="Border">
+        <Setter Property="Stroke" Value="Green" />
+        <Setter Property="StrokeShape" Value="RoundRectangle 10" />
+        <Setter Property="StrokeThickness" Value="1" />
+        <Setter Property="Padding" Value="0, 0, 0, 0"/>
+        <Setter Property="Margin" Value="10, 0, 10, 0" />
+        <Setter Property="BackgroundColor" Value="WhiteSmoke" />
+    </Style>
+    <Style x:Key="PanelTileBorder" TargetType="Border">
+        <Setter Property="StrokeShape">
+            <RoundRectangle CornerRadius="10" />
+        </Setter>
+        <Setter Property="Padding" Value="1, 1, 1, 1"/>
+        <Setter Property="Margin" Value="10, 0, 10, 0" />
+        <Setter Property="BackgroundColor" Value="Green" />
+    </Style>
+    <Style x:Key="PanelTile" TargetType="Border">
+        <Setter Property="StrokeShape">
+            <RoundRectangle CornerRadius="9" />
+        </Setter>
+        <Setter Property="Padding" Value="0, 10, 0, 10"/>
+        <Setter Property="Margin" Value="0, 0, 0, 0" />
+        <Setter Property="BackgroundColor" Value="WhiteSmoke" />
+    </Style>
+    
+    <!-- Optionen-Toolbar "Pille"-Styles -->
+    <Style x:Key="MainPilleStyle" TargetType="Border">
+        <Setter Property="Padding" Value="0"/>
+        <Setter Property="BackgroundColor" Value="WhiteSmoke"/>
+        <Setter Property="VerticalOptions" Value="Center"/>
+        <Setter Property="StrokeThickness" Value="0"/>
+        <Setter Property="HeightRequest" Value="44"/>
+        <Setter Property="StrokeShape">
+            <RoundRectangle CornerRadius="22" />
+        </Setter>
+    </Style>
+
+    <!-- <Style x:Key="MainPilleButtonStyle" TargetType="components:DFPilleOptionButton">
+        <Setter Property="SvgImageHeightRequest" Value="30"/>
+        <Setter Property="SvgImageWidthRequest" Value="30"/>
+        <Setter Property="BackgroundColorNormal" Value="{DynamicResource DataDelimiterColor}"/>
+        <Setter Property="BackgroundColorSelected" Value="{DynamicResource TileTitleBackgroundColor}"/>
+        <Setter Property="BackgroundColorDisabled" Value="Gray"/>
+        <Setter Property="OpacityNormal" Value="0.9"/>
+        <Setter Property="OpacitySelected" Value="1.0"/>
+        <Setter Property="OpacityDisabled" Value="0.5"/>
+
+    </Style> -->
+
+
+</ResourceDictionary>

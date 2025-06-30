@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="CollectionViewIssues.StartPage"
+             Title="StartPage">
+    <VerticalStackLayout
+        Padding="20"
+        Spacing="10">
+        <Label 
+            Text="Hopefully you are able to reproduce and debug - and fix - the problems i have with the CollectionView."
+            HorizontalOptions="Center" />
+        <Label 
+            Text="I heard that ListView will be depricated soon so what else should/could i use if CollectionView may need some more time? Any hints/solutions are welcome"
+            HorizontalOptions="Center" 
+            FontAttributes="Italic"/>
+        
+        <Border
+            Padding="15, 10, 10, 10"
+            BackgroundColor="#FFF7D9A7"
+            StrokeShape="RoundRectangle, 20">
+            <Border.GestureRecognizers>
+                <TapGestureRecognizer Tapped="Demo1_Tapped" />
+            </Border.GestureRecognizers>
+            <VerticalStackLayout>
+                <Label Text="Demo 1: TAP ME TO NAVIGATE TO DEMO-PAGE" FontAttributes="Bold"/>
+                <Label Text="CollectionView and Items of dynamic height" 
+                    Margin="30, 0, 0, 0"/>
+                <Label Text="Tap HERE and a) see how long it takes to load and display the List" 
+                    Margin="30, 0, 0, 0"/>
+                <Label Text="Then tap the gray rows (my own group header) to expand them and watch what happens to the row sizes if you scroll and/or open/close other groups" 
+                    Margin="30, 0, 0, 0"/>
+            </VerticalStackLayout>
+        </Border>
+
+
+        <Border
+            Padding="15, 10, 10, 10"
+            BackgroundColor="WhiteSmoke"
+            StrokeShape="RoundRectangle, 20">
+            <VerticalStackLayout>
+                <Label Text="Demo 2: FontAttributes not working? At least here on the iPhone 16 Pro Simulator with iOS 18.5 all Labels look the same - Normal without any attributes" />
+                <Label Text="This is a normal label"
+                    FontSize="15" 
+                    Margin="30, 0, 0, 0"/>
+                <Label Text="This Text should be italic"
+                    FontSize="15" FontAttributes="Italic"
+                    Margin="30, 0, 0, 0"/>
+                <Label Text="This Text should be bold"
+                    FontSize="15" FontAttributes="Bold"
+                    Margin="30, 0, 0, 0"/>
+                <Label Text="This Text should be bold and italic"
+                    FontSize="15" FontAttributes="Bold,Italic"
+                    Margin="30, 0, 0, 0"/>
+            </VerticalStackLayout>
+        </Border>
+    </VerticalStackLayout>
+</ContentPage>
